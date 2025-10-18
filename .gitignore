@@ -2,3 +2,4 @@ venv-eii
 .continue
 **/train_dir/
 **/test_dir/
+**/archive.zip
