@@ -18,6 +18,19 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 import logging
 
+# Configure TensorFlow GPU memory growth to avoid OOM
+os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
+try:
+    import tensorflow as tf
+    # Allow memory growth
+    physical_devices = tf.config.list_physical_devices('GPU')
+    if physical_devices:
+        for device in physical_devices:
+            tf.config.experimental.set_memory_growth(device, True)
+        logging.info(f"✅ GPU memory growth enabled for {len(physical_devices)} device(s)")
+except Exception as e:
+    logging.warning(f"Could not configure GPU memory growth: {e}")
+
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 

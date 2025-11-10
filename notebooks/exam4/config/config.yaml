@@ -110,7 +110,7 @@ deep_learning:
 
   # Training parameters
   training:
-    batch_size: 32
+    batch_size: 16  # Reducido de 32 a 16 para evitar OOM
     epochs: 100
     learning_rate: 0.0001
     optimizer: "adam"
