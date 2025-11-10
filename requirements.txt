@@ -1,7 +1,27 @@
+# --- Análisis y manejo de datos ---
 pandas>=1.5.0
 numpy>=1.21.0
-yfinance>=0.2.0
+
+# --- Visualización ---
 matplotlib>=3.5.0
 seaborn>=0.11.0
+
+# --- Machine Learning ---
 scikit-learn>=1.0.0
+
+# --- Deep Learning ---
 tensorflow>=2.10.0
+
+# --- Procesamiento de audio ---
+librosa>=0.10.0
+soundfile>=0.12.1
+audioread>=3.0.0
+numba>=0.55.0
+
+# --- Soporte adicional (útiles en notebooks) ---
+tqdm>=4.64.0
+ipython>=8.0.0
+jupyter>=1.0.0
+
+# --- Utilidades opcionales ---
+yfinance>=0.2.0   # (no se usa en este proyecto, pero lo dejas si lo requieres para otros análisis)
