@@ -435,11 +435,19 @@ class DeepLearningModel:
         if self.model is None:
             raise ValueError("Model not trained")
 
-        # Prepare data
-        X_prep, _ = self.prepare_data(X, np.zeros(len(X)), fit_encoder=False)
+        # Prepare images only
+        # Ensure proper shape (N, H, W, C)
+        if len(X.shape) == 3:
+            X = np.expand_dims(X, axis=-1)
+
+        # Ensure images are in [0, 1] range
+        if X.max() > 1.0:
+            X_prep = X / 255.0
+        else:
+            X_prep = X
 
         # Predict
-        y_pred_proba = self.model.predict(X_prep)
+        y_pred_proba = self.model.predict(X_prep, verbose=0)
         y_pred_encoded = np.argmax(y_pred_proba, axis=1)
 
         # Decode labels
@@ -460,11 +468,19 @@ class DeepLearningModel:
         if self.model is None:
             raise ValueError("Model not trained")
 
-        # Prepare data
-        X_prep, _ = self.prepare_data(X, np.zeros(len(X)), fit_encoder=False)
+        # Prepare images only
+        # Ensure proper shape (N, H, W, C)
+        if len(X.shape) == 3:
+            X = np.expand_dims(X, axis=-1)
+
+        # Ensure images are in [0, 1] range
+        if X.max() > 1.0:
+            X_prep = X / 255.0
+        else:
+            X_prep = X
 
         # Predict probabilities
-        y_proba = self.model.predict(X_prep)
+        y_proba = self.model.predict(X_prep, verbose=0)
 
         return y_proba
 
