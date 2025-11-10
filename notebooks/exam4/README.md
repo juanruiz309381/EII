@@ -12,6 +12,8 @@
 2. [Estructura del Proyecto](#estructura-del-proyecto)
 3. [Instalación](#instalación)
 4. [Uso](#uso)
+   - [Entrenamiento](#entrenamiento)
+   - [Predicción con Audio Propio](#predicción-con-audio-propio)
 5. [Metodología](#metodología)
 6. [Resultados](#resultados)
 7. [Documentación](#documentación)
@@ -119,7 +121,9 @@ pip install -r requirements.txt
 
 ## Uso
 
-### 1. Configuración
+### Entrenamiento
+
+#### 1. Configuración
 
 Editar el archivo `config/config.yaml` para ajustar parámetros:
 
@@ -143,39 +147,172 @@ deep_learning:
     batch_normalization: true
 ```
 
-### 2. Entrenar Modelos
+#### 2. Entrenar Modelos
 
-#### Entrenamiento Completo
+**Entrenamiento Completo:**
 
 ```bash
 python train.py
 ```
 
-#### Entrenamiento Rápido (para pruebas)
+**Entrenamiento Rápido (para pruebas):**
 
 ```bash
 python train.py --max-samples 100
 ```
 
-#### Entrenar Solo Modelos Convencionales
+**Entrenar Solo Modelos Convencionales:**
 
 ```bash
 python train.py --skip-deep-learning
 ```
 
-#### Entrenar Solo Deep Learning
+**Entrenar Solo Deep Learning:**
 
 ```bash
 python train.py --skip-conventional
 ```
 
-### 3. Resultados
+#### 3. Resultados del Entrenamiento
 
 Los resultados se guardan automáticamente en `results/`:
 
 - **Modelos**: `results/models/`
 - **Gráficos**: `results/plots/`
 - **Métricas**: `results/metrics/`
+
+---
+
+### Predicción con Audio Propio
+
+Una vez entrenados los modelos, puedes predecir la edad de cualquier audio usando el script `predict.py`.
+
+#### Uso Básico
+
+```bash
+python predict.py --audio <ruta_al_audio> --model <nombre_modelo>
+```
+
+#### Ejemplos Prácticos
+
+**1. Predecir con Random Forest:**
+```bash
+python predict.py --audio mi_voz.mp3 --model random_forest
+```
+
+**2. Predecir con SVM:**
+```bash
+python predict.py --audio audio_prueba.wav --model svm
+```
+
+**3. Predecir con XGBoost:**
+```bash
+python predict.py --audio voz.mp3 --model xgboost
+```
+
+**4. Predecir con Deep Learning:**
+```bash
+python predict.py --audio mi_audio.mp3 --model deep_learning
+```
+
+#### Modelos Disponibles
+
+| Modelo | Comando | Velocidad | Recomendado para |
+|--------|---------|-----------|------------------|
+| Random Forest | `random_forest` | ⚡⚡⚡ Muy rápido | Uso general, batch |
+| SVM | `svm` | ⚡⚡ Rápido | Datos bien separados |
+| XGBoost | `xgboost` | ⚡⚡ Rápido | **Mejor rendimiento** |
+| Deep Learning | `deep_learning` | ⚡ Lento (CPU) / ⚡⚡⚡ Rápido (GPU) | Máxima precisión |
+
+#### Formatos de Audio Soportados
+
+- ✅ MP3
+- ✅ WAV
+- ✅ FLAC
+- ✅ OGG
+- ✅ M4A
+
+**Nota**: El audio se procesa automáticamente a 22050 Hz y 3 segundos de duración.
+
+#### Salida Esperada
+
+```
+⚙️  Cargando configuración...
+✅ Configuración cargada
+
+📦 Cargando modelo random_forest...
+✅ Modelo cargado exitosamente
+
+🎵 Procesando audio: mi_voz.mp3
+✅ Audio cargado (66150 samples, 22050 Hz)
+🔍 Extrayendo características acústicas...
+✅ Features extraídas - Shape: (1, 94)
+
+🤖 Haciendo predicción...
+
+============================================================
+📊 RESULTADO DE LA PREDICCIÓN
+============================================================
+
+🎯 Predicción: ADULTO
+   Confianza: 78.45%
+
+📈 Probabilidades por categoría:
+------------------------------------------------------------
+👉 adulto          [████████████████████████████████░░░░░░░░]  78.45%
+   juvenil         [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]  12.30%
+   adulto_mayor    [███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   6.15%
+   adolescente     [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   3.10%
+============================================================
+```
+
+#### Interpretación de Resultados
+
+**Confianza Alta (>70%):**
+- ✅ Predicción confiable, usar este resultado
+
+**Confianza Media (40-70%):**
+- ⚠️ Predicción moderada, revisar otras probabilidades
+
+**Confianza Baja (<40%):**
+- ❌ Predicción poco confiable, probar con otro modelo
+
+#### Comparar Varios Modelos
+
+Para obtener mejor confianza, prueba el mismo audio con varios modelos:
+
+```bash
+# Probar con todos los modelos
+python predict.py --audio mi_voz.mp3 --model random_forest
+python predict.py --audio mi_voz.mp3 --model svm
+python predict.py --audio mi_voz.mp3 --model xgboost
+python predict.py --audio mi_voz.mp3 --model deep_learning
+```
+
+Si la mayoría coincide en la misma categoría, la predicción es más confiable.
+
+#### Opciones Avanzadas
+
+**Usar modelo de ubicación personalizada:**
+```bash
+python predict.py --audio mi_audio.mp3 \
+  --model random_forest \
+  --model-path /ruta/personalizada/modelo.pkl
+```
+
+**Usar configuración personalizada:**
+```bash
+python predict.py --audio mi_audio.mp3 \
+  --model random_forest \
+  --config config/mi_config.yaml
+```
+
+#### Ayuda
+
+Para ver todas las opciones disponibles:
+```bash
+python predict.py --help
+```
 
 ---
 
