@@ -4,3 +4,54 @@ venv-eii
 **/test_dir/
 **/archive.zip
 *.h5
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Entornos virtuales
+venv/
+env/
+ENV/
+.venv
+**/venv_final_task/
+venv_final_task/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Archivos de resultados grandes
+**/results/*.json
+**/results/*.csv
+**/results/*.txt
+
+# Archivos temporales
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Modelos grandes (si aplica)
+*.bin
+*.onnx
+*.pkl
+*.model
+
+# Cache
+.cache/
+*.cache

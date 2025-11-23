@@ -1,0 +1,52 @@
+# Requirements para Parcial 5: Evaluación de Modelos LLM con Ollama
+# Python >= 3.8
+
+# Jupyter y entorno interactivo
+jupyter>=1.0.0
+notebook>=6.5.0
+ipykernel>=6.20.0
+ipywidgets>=8.0.0
+
+# Análisis de datos
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Visualización
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.14.0
+
+# Procesamiento de texto y NLP (opcional pero útil)
+nltk>=3.8
+textblob>=0.17.0
+
+# Utilidades para JSON y tiempo
+python-dateutil>=2.8.2
+
+# Progress bars y UI
+tqdm>=4.65.0
+
+# Testing (opcional)
+pytest>=7.3.0
+pytest-timeout>=2.1.0
+
+# Linting y formateo (opcional, para desarrollo)
+black>=23.3.0
+flake8>=6.0.0
+
+# Para exportar notebooks
+nbconvert>=7.0.0
+
+# Para análisis estadístico avanzado
+scipy>=1.10.0
+statsmodels>=0.14.0
+
+# Para generar reportes en PDF (opcional)
+reportlab>=4.0.0
+markdown>=3.4.0
+
+# HTTP requests (si necesitas hacer llamadas API adicionales)
+requests>=2.31.0
+
+# Manejo de archivos YAML (para configuración)
+pyyaml>=6.0
